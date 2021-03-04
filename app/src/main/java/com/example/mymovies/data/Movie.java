@@ -7,17 +7,19 @@ public class Movie {
     private String originalTitle;
     private String overview;
     private String posterURL;
+    private String bigPosterURL;
     private String backdropURL;
     private double voteAverage;
     private String releaseDate;
 
-    public Movie(int id, int voteCount, String title, String originalTitle, String overview, String posterURL, String backdropURL, double voteAverage, String releaseDate) {
+    public Movie(int id, int voteCount, String title, String originalTitle, String overview, String posterURL, String bigPosterURL, String backdropURL, double voteAverage, String releaseDate) {
         this.id = id;
         this.voteCount = voteCount;
         this.title = title;
         this.originalTitle = originalTitle;
         this.overview = overview;
         this.posterURL = posterURL;
+        this.bigPosterURL = bigPosterURL;
         this.backdropURL = backdropURL;
         this.voteAverage = voteAverage;
         this.releaseDate = releaseDate;
@@ -25,6 +27,14 @@ public class Movie {
 
     public int getId() {
         return id;
+    }
+
+    public void setBigPosterURL(String bigPosterURL) {
+        this.bigPosterURL = bigPosterURL;
+    }
+
+    public String getBigPosterURL() {
+        return bigPosterURL;
     }
 
     public int getVoteCount() {
