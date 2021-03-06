@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewPopularity"
+        android:id="@+id/textViewPopularitySwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/most_popular"
@@ -32,7 +32,7 @@
         app:layout_constraintTop_toTopOf="@+id/switchSort" />
 
     <TextView
-        android:id="@+id/textViewRating"
+        android:id="@+id/textViewRatingSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/top_rating"

@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.res.Resources;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
         recyclerView = findViewById(R.id.recyclerViewPosters);
-        textViewPopularity = findViewById(R.id.textViewPopularity);
-        textViewTopRated = findViewById((R.id.textViewRating));
+        textViewPopularity = findViewById(R.id.textViewPopularitySwitch);
+        textViewTopRated = findViewById((R.id.textViewRatingSwitch));
         aSwitch = findViewById(R.id.switchSort);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         movieAdapter = new MovieAdapter();
@@ -57,7 +57,10 @@ public class MainActivity extends AppCompatActivity {
         movieAdapter.setOnPosterClickListener(new MovieAdapter.OnPosterClickListener() {
             @Override
             public void onPosterClick(int position) {
-                Toast.makeText(MainActivity.this, "" + position, Toast.LENGTH_SHORT).show();
+                Movie movie = movieAdapter.getMovies().get(position);
+                Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+                intent.putExtra("id", movie.getId());
+                startActivity(intent);
             }
         });
         movieAdapter.setOnReachEndListener(new MovieAdapter.OnReachEndListener() {
