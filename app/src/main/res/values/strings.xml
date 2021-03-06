@@ -3,5 +3,5 @@
     <string name="success">Success!</string>
     <string name="movie_poster">Movie poster</string>
     <string name="most_popular">Most popular</string>
-    <string name="top_rating">Top Rating</string>
+    <string name="top_rating">Top Rated</string>
 </resources>

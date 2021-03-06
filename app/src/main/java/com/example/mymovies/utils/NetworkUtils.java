@@ -30,7 +30,7 @@ public class NetworkUtils {
     private static final String SORT_BY_TOP_RATED = "vote_average.desc";
 
     public static final int POPULARITY = 0;
-    public static final int TOP_RATED = 0;
+    public static final int TOP_RATED = 1;
 
     private static URL buildURL(int sortBy, int page) {
         String methodOfSort;
