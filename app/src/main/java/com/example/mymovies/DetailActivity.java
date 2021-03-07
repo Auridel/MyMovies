@@ -79,7 +79,7 @@ public class DetailActivity extends AppCompatActivity {
             id = intent.getIntExtra("id", -1);
             movie = viewModel.getMovieById(id);
 
-            Picasso.get().load(movie.getBigPosterURL()).into(imageViewBigPoster);
+            Picasso.get().load(movie.getBigPosterURL()).placeholder(R.drawable.placeholder780).into(imageViewBigPoster);
             textViewTitle.setText(movie.getTitle());
             textViewOriginalTitle.setText(movie.getOriginalTitle());
             textViewRating.setText(Double.toString(movie.getVoteAverage()));
