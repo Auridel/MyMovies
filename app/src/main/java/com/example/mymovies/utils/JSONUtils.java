@@ -1,7 +1,5 @@
 package com.example.mymovies.utils;
 
-import android.util.Log;
-
 import com.example.mymovies.data.Movie;
 import com.example.mymovies.data.Review;
 import com.example.mymovies.data.Trailer;
@@ -48,12 +46,15 @@ public class JSONUtils {
                 String title = objMovie.getString(KEY_TITLE);
                 String originalTitle = objMovie.getString(KEY_ORIGINAL_TITLE);
                 String overview = objMovie.getString(KEY_OVERVIEW);
-                String posterURL = BASE_IMAGES_URL + SMALL_POSTER_SIZE + objMovie.getString(KEY_POSTER_PATH);
-                String bigPosterURL = BASE_IMAGES_URL + BIG_POSTER_SIZE + objMovie.getString(KEY_POSTER_PATH);
+                String posterURL = BASE_IMAGES_URL + SMALL_POSTER_SIZE +
+                        objMovie.getString(KEY_POSTER_PATH);
+                String bigPosterURL = BASE_IMAGES_URL + BIG_POSTER_SIZE +
+                        objMovie.getString(KEY_POSTER_PATH);
                 String backdropURL = objMovie.getString(KEY_BACKDROP_PATH);
                 double voteAverage = objMovie.getDouble(KEY_VOTE_AVERAGE);
                 String releaseDate = objMovie.getString(KEY_RELEASE_DATE);
-                Movie movie = new Movie(id, voteCount, title, originalTitle, overview, posterURL, bigPosterURL, backdropURL, voteAverage, releaseDate);
+                Movie movie = new Movie(id, voteCount, title, originalTitle,
+                        overview, posterURL, bigPosterURL, backdropURL, voteAverage, releaseDate);
                 result.add(movie);
             }
         } catch (Exception e) {
@@ -74,7 +75,6 @@ public class JSONUtils {
                 Review review = new Review(author, content);
                 result.add(review);
             }
-            Log.i("ResSize", "" + result.size());
             return result;
         } catch (JSONException e) {
             e.printStackTrace();

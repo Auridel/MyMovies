@@ -32,7 +32,8 @@ public class TrailerAdapter extends RecyclerView.Adapter<TrailerAdapter.TrailerV
                 @Override
                 public void onClick(View v) {
                     if(onTrailerClickListener != null) {
-                        onTrailerClickListener.onTrailerClick(trailers.get(getAdapterPosition()).getKey());
+                        onTrailerClickListener.onTrailerClick
+                                (trailers.get(getAdapterPosition()).getKey());
                     }
                 }
             });
@@ -50,7 +51,8 @@ public class TrailerAdapter extends RecyclerView.Adapter<TrailerAdapter.TrailerV
     @NonNull
     @Override
     public TrailerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.trailer_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.trailer_item, parent, false);
         return new TrailerViewHolder(view);
     }
 
