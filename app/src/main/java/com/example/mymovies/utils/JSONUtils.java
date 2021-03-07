@@ -1,5 +1,7 @@
 package com.example.mymovies.utils;
 
+import android.util.Log;
+
 import com.example.mymovies.data.Movie;
 import com.example.mymovies.data.Review;
 import com.example.mymovies.data.Trailer;
@@ -72,6 +74,7 @@ public class JSONUtils {
                 Review review = new Review(author, content);
                 result.add(review);
             }
+            Log.i("ResSize", "" + result.size());
             return result;
         } catch (JSONException e) {
             e.printStackTrace();
