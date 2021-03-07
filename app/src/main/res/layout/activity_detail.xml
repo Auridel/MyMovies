@@ -61,9 +61,10 @@
             android:layout_width="56dp"
             android:layout_height="15dp"
             android:layout_margin="8dp"
+            android:layout_marginTop="8dp"
             android:text="@string/original_title"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewLableTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
 
         <TextView
             android:id="@+id/textViewOriginalTitle"
@@ -79,15 +80,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:layout_marginTop="4dp"
             android:text="@string/rating"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewLableOriginalTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewOriginalTitle" />
 
         <TextView
             android:id="@+id/textViewRating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:layout_marginTop="4dp"
             app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
             app:layout_constraintTop_toBottomOf="@+id/textViewOriginalTitle" />
 
@@ -98,13 +101,14 @@
             android:layout_margin="8dp"
             android:text="@string/release_date"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewLabelRating" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewRating" />
 
         <TextView
             android:id="@+id/textViewReleaseDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:layout_marginTop="1dp"
             app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
             app:layout_constraintTop_toBottomOf="@+id/textViewRating" />
 
@@ -115,7 +119,7 @@
             android:layout_margin="8dp"
             android:text="@string/description"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewLabelReleaseDate" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewReleaseDate" />
 
         <TextView
             android:id="@+id/textViewOverview"
@@ -124,6 +128,22 @@
             android:layout_margin="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewLabelDescription" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewTrailers"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewOverview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/recyclerViewReviews"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recyclerViewTrailers"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -14,15 +16,26 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mymovies.adapters.ReviewAdapter;
+import com.example.mymovies.adapters.TrailerAdapter;
 import com.example.mymovies.data.FavoriteMovie;
 import com.example.mymovies.data.MainViewModel;
 import com.example.mymovies.data.Movie;
 import com.example.mymovies.data.MovieDao;
+import com.example.mymovies.data.Review;
+import com.example.mymovies.data.Trailer;
+import com.example.mymovies.utils.JSONUtils;
+import com.example.mymovies.utils.NetworkUtils;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class DetailActivity extends AppCompatActivity {
     private ImageView imageViewBigPoster;
@@ -32,6 +45,11 @@ public class DetailActivity extends AppCompatActivity {
     private TextView textViewReleaseDate;
     private TextView textViewOverview;
     private ImageView imageViewAddToFavorite;
+
+    private RecyclerView recyclerViewTrailers;
+    private RecyclerView recyclerViewReviews;
+    private TrailerAdapter trailerAdapter;
+    private ReviewAdapter reviewAdapter;
 
     private int id;
     private Movie movie;
@@ -56,13 +74,36 @@ public class DetailActivity extends AppCompatActivity {
         if (intent != null && intent.hasExtra("id")) {
             id = intent.getIntExtra("id", -1);
             movie = viewModel.getMovieById(id);
-            setFavoriteMovie();
+
             Picasso.get().load(movie.getBigPosterURL()).into(imageViewBigPoster);
             textViewTitle.setText(movie.getTitle());
             textViewOriginalTitle.setText(movie.getOriginalTitle());
             textViewRating.setText(Double.toString(movie.getVoteAverage()));
             textViewReleaseDate.setText(movie.getReleaseDate());
             textViewOverview.setText(movie.getOverview());
+            setFavoriteMovie();
+
+            recyclerViewTrailers = findViewById(R.id.recyclerViewTrailers);
+            recyclerViewReviews = findViewById(R.id.recyclerViewReviews);
+            reviewAdapter = new ReviewAdapter();
+            trailerAdapter = new TrailerAdapter();
+            trailerAdapter.setOnTrailerClickListener(new TrailerAdapter.OnTrailerClickListener() {
+                @Override
+                public void onTrailerClick(String url) {
+                    Intent intentToTrailer = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    startActivity(intentToTrailer);
+                }
+            });
+            recyclerViewReviews.setLayoutManager(new LinearLayoutManager(this));
+            recyclerViewTrailers.setLayoutManager(new LinearLayoutManager(this));
+            recyclerViewTrailers.setAdapter(trailerAdapter);
+            recyclerViewReviews.setAdapter(reviewAdapter);
+            JSONObject jsonObjectTrailers = NetworkUtils.getJSONForVideo(movie.getId());
+            JSONObject jsonObjectReviews = NetworkUtils.getJSONForReviews(movie.getId());
+            ArrayList<Trailer> trailers = JSONUtils.getTrailerFromJSON(jsonObjectTrailers);
+            ArrayList<Review> reviews = JSONUtils.getReviewsFromJSON(jsonObjectReviews);
+            reviewAdapter.setReviews(reviews);
+            trailerAdapter.setTrailers(trailers);
         } else {
             finish();
         }
