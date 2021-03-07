@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -34,6 +35,7 @@ import org.json.JSONObject;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<JSONObject> {
     private RecyclerView recyclerView;
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private static int page = 1;
     private boolean isLoading = false;
     private int methodOfSort;
+    private static String lang;
 
     private static final int LOADER_ID = 123;
     private LoaderManager loaderManager;
@@ -56,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        lang = Locale.getDefault().getLanguage();
         loaderManager = LoaderManager.getInstance(this);
         viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
         recyclerView = findViewById(R.id.recyclerViewPosters);
@@ -63,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         textViewTopRated = findViewById((R.id.textViewRatingSwitch));
         progressBarLoading = findViewById(R.id.progressBarLoading);
         aSwitch = findViewById(R.id.switchSort);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, getColumnCount()));
         movieAdapter = new MovieAdapter();
         recyclerView.setAdapter(movieAdapter);
         aSwitch.setChecked(true);
@@ -87,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         movieAdapter.setOnReachEndListener(new MovieAdapter.OnReachEndListener() {
             @Override
             public void OnReachEnd() {
-                if(!isLoading) {
+                if (!isLoading) {
                     downloadData(methodOfSort, page);
                 }
             }
@@ -96,11 +100,18 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         moviesFromLiveData.observe(this, new Observer<List<Movie>>() {
             @Override
             public void onChanged(List<Movie> movies) {
-                if(page == 1) {
+                if (page == 1) {
                     movieAdapter.setMovies(movies);
                 }
             }
         });
+    }
+
+    private int getColumnCount() {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int width = (int) (displayMetrics.widthPixels / displayMetrics.density);
+        return Math.max((width / 185), 2);
     }
 
     @Override
@@ -150,7 +161,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     private void downloadData(int methodOfSort, int page) {
-        URL url = NetworkUtils.buildURL(methodOfSort, page);
+        URL url = NetworkUtils.buildURL(methodOfSort, page, lang);
         Bundle bundle = new Bundle();
         bundle.putString("url", url.toString());
         loaderManager.restartLoader(LOADER_ID, bundle, this);
@@ -173,12 +184,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onLoadFinished(@NonNull Loader<JSONObject> loader, JSONObject jsonObject) {
         ArrayList<Movie> movies = JSONUtils.getMoviesFromJSON(jsonObject);
-        if(movies != null && !movies.isEmpty()){
-            if(page == 1) {
+        if (movies != null && !movies.isEmpty()) {
+            if (page == 1) {
                 viewModel.deleteAllMovies();
                 movieAdapter.clear();
             }
-            for (Movie movie :  movies){
+            for (Movie movie : movies) {
                 viewModel.insertMovie(movie);
             }
             movieAdapter.addMovies(movies);

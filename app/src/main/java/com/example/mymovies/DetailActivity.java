@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +37,7 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class DetailActivity extends AppCompatActivity {
     private ImageView imageViewBigPoster;
@@ -54,6 +56,7 @@ public class DetailActivity extends AppCompatActivity {
     private int id;
     private Movie movie;
     private FavoriteMovie favoriteMovie;
+    private static String lang;
 
     private MainViewModel viewModel;
 
@@ -62,6 +65,7 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+        lang = Locale.getDefault().getLanguage();
         viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
         imageViewBigPoster = findViewById(R.id.imageViewBigPoster);
         textViewTitle = findViewById(R.id.textViewTitle);
@@ -98,8 +102,8 @@ public class DetailActivity extends AppCompatActivity {
             recyclerViewTrailers.setLayoutManager(new LinearLayoutManager(this));
             recyclerViewTrailers.setAdapter(trailerAdapter);
             recyclerViewReviews.setAdapter(reviewAdapter);
-            JSONObject jsonObjectTrailers = NetworkUtils.getJSONForVideo(movie.getId());
-            JSONObject jsonObjectReviews = NetworkUtils.getJSONForReviews(movie.getId());
+            JSONObject jsonObjectTrailers = NetworkUtils.getJSONForVideo(movie.getId(), lang);
+            JSONObject jsonObjectReviews = NetworkUtils.getJSONForReviews(movie.getId(), lang);
             ArrayList<Trailer> trailers = JSONUtils.getTrailerFromJSON(jsonObjectTrailers);
             ArrayList<Review> reviews = JSONUtils.getReviewsFromJSON(jsonObjectReviews);
             reviewAdapter.setReviews(reviews);

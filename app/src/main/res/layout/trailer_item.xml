@@ -18,18 +18,21 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/ic_media_play" />
+            app:srcCompat="@drawable/youtube_icon_small" />
 
         <TextView
-            android:layout_width="0dp"
-            android:contentDescription="@string/start_trailer"
-            android:layout_height="wrap_content"
             android:id="@+id/textViewNameOfVideo"
-            app:layout_constraintTop_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/imageViewPlay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:contentDescription="@string/start_trailer"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_margin="8dp"/>
+            app:layout_constraintStart_toEndOf="@id/imageViewPlay"
+            app:layout_constraintTop_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
 

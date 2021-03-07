@@ -2,8 +2,10 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollViewDetails"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
     tools:context=".DetailActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,121 +33,14 @@
             app:layout_constraintTop_toBottomOf="@+id/imageViewBigPoster"
             app:srcCompat="@drawable/favourite_add_to" />
 
-        <TextView
-            android:id="@+id/textViewLableTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="@string/title"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageViewAddToFavorite" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guidelineCenter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5" />
-
-        <TextView
-            android:id="@+id/textViewTitle"
+        <include
+            android:id="@+id/movieInfo"
+            layout="@layout/movie_info"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
-            app:layout_constraintTop_toBottomOf="@+id/imageViewAddToFavorite" />
-
-        <TextView
-            android:id="@+id/textViewLableOriginalTitle"
-            android:layout_width="56dp"
-            android:layout_height="15dp"
-            android:layout_margin="8dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/original_title"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
-
-        <TextView
-            android:id="@+id/textViewOriginalTitle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
-            app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
-
-        <TextView
-            android:id="@+id/textViewLabelRating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:layout_marginTop="4dp"
-            android:text="@string/rating"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewOriginalTitle" />
-
-        <TextView
-            android:id="@+id/textViewRating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:layout_marginTop="4dp"
-            app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
-            app:layout_constraintTop_toBottomOf="@+id/textViewOriginalTitle" />
-
-        <TextView
-            android:id="@+id/textViewLabelReleaseDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="@string/release_date"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewRating" />
-
-        <TextView
-            android:id="@+id/textViewReleaseDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:layout_marginTop="1dp"
-            app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
-            app:layout_constraintTop_toBottomOf="@+id/textViewRating" />
-
-        <TextView
-            android:id="@+id/textViewLabelDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="@string/description"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewReleaseDate" />
-
-        <TextView
-            android:id="@+id/textViewOverview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewLabelDescription" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewTrailers"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textViewOverview" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewReviews"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/recyclerViewTrailers" />
+            app:layout_constraintTop_toBottomOf="@id/imageViewAddToFavorite" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
