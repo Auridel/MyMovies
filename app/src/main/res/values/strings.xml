@@ -11,4 +11,6 @@
     <string name="description">Description:</string>
     <string name="added_to_favorites">Added to Favorites</string>
     <string name="removed_from_favorites">Removed from Favorites</string>
+    <string name="home">Home</string>
+    <string name="favorite">Favorite</string>
 </resources>
